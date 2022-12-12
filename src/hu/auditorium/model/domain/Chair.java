@@ -38,4 +38,8 @@ public class Chair {
         return this.row == row && this.number == number;
     }
 
+    @Override
+    public String toString() {
+        return isOccupied() ? "x" : String.valueOf(getCategoryId());
+    }
 }

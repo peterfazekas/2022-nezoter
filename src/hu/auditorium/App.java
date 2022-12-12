@@ -49,5 +49,6 @@ public class App {
         System.out.println("6. feladat");
         System.out.println(chairService.countSingleFreeChairs() +
                 " db egydülálló üres szék van a nézőtéren.");
+        fileWriter.printAll(chairService.getAuditoriumStatus());
     }
 }

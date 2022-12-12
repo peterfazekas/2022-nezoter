@@ -2,10 +2,10 @@ package hu.auditorium.controller;
 
 import hu.auditorium.model.domain.Chair;
 
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 public class ChairService {
 
@@ -93,4 +93,26 @@ public class ChairService {
                 isOccupied(chair.getRow(), chair.getNumber() - 1) &&
                 isOccupied(chair.getRow(), chair.getNumber() + 1);
     }
+
+    /**
+     * 7. feldat
+     */
+    public List<String> getAuditoriumStatus() {
+        String auditoriumStatusInRow = getAuditoriumStatusInRow();
+        return IntStream.range(0, ROW_MAX)
+                .mapToObj(row -> printChairsInRow(auditoriumStatusInRow, row))
+                .collect(Collectors.toList());
+    }
+
+    private String getAuditoriumStatusInRow() {
+        return chairs.stream()
+                .map(Chair::toString)
+                .collect(Collectors.joining());
+    }
+
+    private String printChairsInRow(String auditoriumStatusInRow, int row) {
+        return auditoriumStatusInRow.substring(
+                row * NUMBER_MAX, (row + 1) * NUMBER_MAX);
+    }
+
 }
